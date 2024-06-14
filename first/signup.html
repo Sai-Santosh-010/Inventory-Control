@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <script src="/js/validation.js" defer></script>
+    <script type="text/javascript">
+        function validate()
+        {
+            var name = document.getElementById("Name");
+            var email = document.getElementById("Email");
+            var password = document.getElementById("Password");
+            var password_confirmation = document.getElementById("Password_Confirmation");
+
+            if ( name.value == "")
+            {
+                alert("Name is Required !");
+                return false;
+            }
+            else
+            if (email.value == "")
+            {
+                alert("Email is Required !");
+                return false;
+            }
+            else
+            if (password.value == "")
+            {
+                alert("Password is Required !");
+                return false;
+            }
+            else
+            if (password_confirmation.value == "")
+            {
+                alert("Password Conformation is Requried !");
+                return false;
+            }
+            else {
+                true;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <h1>Signup</h1>
+    
+    <form onsubmit="return validate()" action="process-signup.php" method="post" id="signup"  novalidate>
+        <div>
+            <label for="name">Name</label>
+            <input placeholder="Name" type="text" id="name" name="name" >
+        </div>
+        
+        <div>
+            <label for="email">email</label>
+            <input placeholder="Email" type="email" id="email" name="email" >
+        </div>
+        
+        <div>
+            <label for="password">Password</label>
+            <input placeholder="Password" type="password" id="password" name="password" >
+        </div>
+        
+        <div>
+            <label for="password_confirmation">Repeat password</label>
+            <input placeholder="Password_Confirmation" type="password" id="password_confirmation" name="password_confirmation" required>
+        </div>
+        
+        <button type="submit">Sign up</button>
+    </form>
+    
+</body>
+</html>

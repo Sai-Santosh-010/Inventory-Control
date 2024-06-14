@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Control</title>
+    <link rel="stylesheet" type="text/css" href="/first/css/Box.css">
+    <link rel="stylesheet" type="text/css" href="/first/css/Background.css">
+    <link rel="stylesheet" type="text/css" href="/first/css/Button1.css">
+    <link rel="stylesheet" type="text/css" href="/first/css/Input.css">
+    <link rel="stylesheet" type="text/css" href="/first/css/Font1.css">
+    <link rel="stylesheet" type="text/css" href="/first/css/table.css">
+</head>
+<body>
+    <h1 id="demotext" align="center">Inventory Control System</h1>
+<div class="container">
+    <!-- Form for adding new items -->
+    <div class="item-box">
+    <form id="addItemForm">
+        <fieldset>
+            <legend id="demotext">Add Item</legend>
+            <label id="demotext" for="addItemName">Item Name:</label>
+            <input class = "input" type="text" id="addItemName" required>
+        
+            <label id="demotext" for="addItemQuantity">Quantity:</label>
+            <input class = "input" type="number" id="addItemQuantity" required>
+    
+            <label id="demotext" for="additemPrice">Price:</label>
+            <input class = "input" type="number" id="additemPrice" step="0.01" required>
+        
+            <button type="button" onclick="addItem()">Add Item</button>
+        </fieldset>
+    </form>
+    </div>
+    <div class="item-box">
+    <!-- Form for updating an existing item -->
+    <form id="updateItemForm">
+        <fieldset>
+            <legend id="demotext">Update Item</legend>
+
+            <label id="demotext" for="updateItemName">New Item Name:</label>
+            <input class = "input" type="text" id="updateItemName" required>
+        
+            <label id="demotext" for="updateItemQuantity">New Quantity:</label>
+            <input class = "input" type="number" id="updateItemQuantity" required>
+
+            <label id="demotext" for="updateItemCost">New Price:</label>
+            <input class = "input" type="number" id="updateItemCost" step="0.01" required>
+        
+            <button type="button" onclick="updateItem()">Update Item</button>
+        </fieldset>
+    </form>
+    </div>
+    <div class="item-box">
+    <!-- Form for deleting an item -->
+    <form id="deleteItemForm">
+        <fieldset>
+            <legend id="demotext">Delete Item</legend>
+            <label id="demotext" for="deleteItemName">Item Name:</label>
+            <input class = "input" type="text" id="deleteItemName" required>
+        
+            <button type="button" onclick="deleteItem()">Delete Item</button>
+        </fieldset>
+    </form>
+    </div>
+</div>
+    <!-- Displaying the inventory -->
+    <h2 id="demotext" align="center">Inventory List</h2>
+    <table id="inventoryTable" border="2">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Inventory items will be displayed here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript functions for adding, updating, and deleting items
+        // JavaScript code (script.js)
+        function addItem() {
+            var addItemName = document.getElementById("addItemName").value;
+            var addItemQuantity = document.getElementById("addItemQuantity").value;
+            var addItemCost = document.getElementById("additemPrice").value;
+
+            var inventoryTable = document.getElementById("inventoryTable").getElementsByTagName('tbody')[0];
+            var newRow = inventoryTable.insertRow();
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+
+            cell1.innerHTML = addItemName;
+            cell2.innerHTML = addItemQuantity;
+            cell3.innerHTML = addItemCost;
+
+            // Clear the form fields
+            document.getElementById("addItemName").value = "";
+            document.getElementById("addItemQuantity").value = "";
+            document.getElementById("additemPrice").value = "";
+        }
+
+        // Update Item and Delete Item functions can be modified similarly
+        // Update the table row with the new values for Update Item
+        function updateItem() {
+            var updateItemName = document.getElementById("updateItemName").value;
+            var updateItemQuantity = document.getElementById("updateItemQuantity").value;
+            var updateItemCost = document.getElementById("updateItemCost").value;
+
+            // Find the table row by item name
+            var table = document.getElementById("inventoryTable");
+            var rows = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var itemName = row.cells[0].innerHTML;
+
+                if (itemName === updateItemName) {
+                    // Update the table cell values for quantity and cost
+                    row.cells[1].innerHTML = updateItemQuantity;
+                    row.cells[2].innerHTML = updateItemCost;
+
+                    // Clear the form fields
+                    document.getElementById("updateItemName").value = "";
+                    document.getElementById("updateItemQuantity").value = "";
+                    document.getElementById("updateItemCost").value = "";
+
+                    return; // Exit the loop since the item is updated
+                }
+            }
+
+            // Handle cases where the item name is not found
+            alert("Item not found in the inventory.");
+        }
+
+        // Remove the table row for Delete Item
+        function deleteItem() {
+            var deleteItemName = document.getElementById("deleteItemName").value;
+
+            // Find the table row by item name
+            var table = document.getElementById("inventoryTable");
+            var rows = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var itemName = row.cells[0].innerHTML;
+
+                if (itemName === deleteItemName) {
+                    // Remove the table row
+                    table.deleteRow(i);
+
+                    // Clear the form field
+                    document.getElementById("deleteItemName").value = "";
+
+                    return; // Exit the loop since the item is deleted
+                }
+            }
+
+            // Handle cases where the item name is not found
+            alert("Item not found in the inventory.");
+        }
+
+
+
+    </script>
+</body>
+</html>
